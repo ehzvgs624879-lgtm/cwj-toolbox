@@ -7,13 +7,24 @@ app = Flask(__name__)
 # ===== 爬虫函数（抓网页标题）=====
 def crawl_title(url):
     headers = {
-        "User-Agent": "Mozilla/5.0"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9",
+        "Referer": "https://www.google.com/",
+        "DNT": "1",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1"
     }
-    res = requests.get(url, headers=headers, timeout=10)
-    soup = BeautifulSoup(res.text, "html.parser")
-
-    title = soup.title.text.strip() if soup.title else "无标题"
-    return title
+    try:
+        res = requests.get(url, headers=headers, timeout=10)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.text, "html.parser")
+        title = soup.title.text.strip() if soup.title else "无标题"
+        return title
+    except requests.exceptions.HTTPError as e:
+        if res.status_code == 403:
+            return "被拒绝访问（网站反爬虫保护）"
+        raise
 
 
 # ===== 天气接口（免费API）=====
