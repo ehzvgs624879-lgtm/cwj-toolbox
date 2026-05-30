@@ -1,0 +1,12 @@
+kind = "web"
+previewPath = "/weather"
+title = "天气查询应用"
+version = "1.0.0"
+
+[[services]]
+localPort = 8000
+name = "Weather App"
+paths = ["/weather"]
+
+[services.development]
+run = "cd weather-app && PORT=8000 python app.py"
