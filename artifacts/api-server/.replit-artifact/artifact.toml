@@ -1,5 +1,5 @@
 kind = "api"
-previewPath = "/"
+previewPath = "/api"
 title = "API Server"
 version = "1.0.0"
 id = "3B4_FFSkEVBkAeYMFRJ2e"
@@ -29,11 +29,3 @@ NODE_ENV = "production"
 
 [services.production.health.startup]
 path = "/api/healthz"
-
-[[services]]
-localPort = 8000
-name = "Weather App"
-paths = ["/"]
-
-[services.development]
-run = "cd /home/runner/workspace/weather-app && PORT=8000 python app.py"

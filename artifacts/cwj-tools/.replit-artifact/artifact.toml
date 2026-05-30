@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CWJ Tools"
+version = "1.0.0"
+id = "artifacts/cwj-tools"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22475
+
+[services.development]
+run = "pnpm --filter @workspace/cwj-tools run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cwj-tools", "run", "build" ]
+publicDir = "artifacts/cwj-tools/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22475"
+BASE_PATH = "/"

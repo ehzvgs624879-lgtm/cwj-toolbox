@@ -1,0 +1,2 @@
+- [Artifact proxy routing](artifact-proxy-routing.md) — proxy routes only via artifact.toml; services without a run command fail schema validation; standalone webview workflows don't get proxy routes.
+- [Flask in pnpm workspace](flask-in-pnpm-workspace.md) — Flask outside artifacts/ dir has no proxy route; artifact-managed workflows run from artifact dir not workspace root; use absolute paths in run commands.
